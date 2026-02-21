@@ -54,7 +54,7 @@
     <div class="wlbox">
       <div class="wlrow">
         <div class="k">直近12週の勝敗：</div>
-        <div class="wl">××◯◯◯◯◯×◯◯◯◯</div>
+        <div class="wl">◯◯◯◯×◯◯◯◯◯××</div>
         <div class="muted">（◯=勝ち / ×=負け / △=±0 / －=欠損）</div>
       </div>
       <div class="wlrow" style="margin-top:8px;">
@@ -67,7 +67,7 @@
     <table>
       <thead>
         <tr>
-          <th>対象週</th>
+          <th>対象週（クリックで過去回）</th>
           <th class="num">週次リターン（TOP5平均）</th>
           <th class="num">累積指数</th>
           <th class="num">n</th>
@@ -262,7 +262,8 @@
 
     <div class="muted" style="margin-top:12px;line-height:1.7">
       ※ 週次リターンは backtest_weekly_perf_top5_overall.csv の mean_next_ret を使用しています。<br/>
-      ※ 実運用の約定・スリッページ・コスト等は反映していません（信頼のため明示）。
+      ※ 実運用の約定・スリッページ・コスト等は反映していません（信頼のため明示）。<br/>
+      ※ 「対象週」のリンクは site/history/ 配下のCSV（MANIFEST）から復元しています（同日最新版だけ残す運用でも週次リンクは機能します）。
     </div>
   </div>
 </body>
