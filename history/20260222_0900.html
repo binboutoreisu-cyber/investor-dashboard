@@ -1,0 +1,964 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>今週の投資家ページ - 2/2週</title>
+  <style>
+    :root {
+      --bg:#070b16;
+      --card:#0f172a;
+      --card2:#0b1224;
+      --text:#e5e7eb;
+      --muted:#94a3b8;
+      --line:rgba(148,163,184,.18);
+      --accent:#22c55e;
+      --warn:#f59e0b;
+      --hot:#ef4444;
+    }
+    *{box-sizing:border-box}
+    body {
+      margin:0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Meiryo", sans-serif;
+      background:
+        radial-gradient(900px 600px at 15% 0%, rgba(34,197,94,.10), transparent 60%),
+        radial-gradient(900px 700px at 80% 10%, rgba(245,158,11,.10), transparent 60%),
+        radial-gradient(800px 700px at 70% 100%, rgba(239,68,68,.08), transparent 60%),
+        var(--bg);
+      color:var(--text);
+    }
+    .wrap{max-width:1120px;margin:0 auto;padding:22px}
+    h1{margin:0;font-size:22px;letter-spacing:.2px}
+    .meta{color:var(--muted);font-size:12px;line-height:1.6}
+    .meta small{opacity:.9}
+    .kpi{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+    .kpi .pill2{padding:4px 10px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:12px;color:var(--muted)}
+    .navrow {
+      margin-top:10px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:stretch;
+      justify-content:space-between;
+    }
+    .navbox {
+      padding:10px 12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      border-radius: 14px;
+      color: var(--muted);
+      font-size:12px;
+      line-height:1.6;
+      flex: 1;
+      min-width: 280px;
+    }
+    .navbox b {color:#e5e7eb}
+    .historylinks a {
+      color:#c7d2fe;
+      text-decoration:none;
+      font-weight:800;
+    }
+    .historylinks a:hover {text-decoration:underline}
+    .actionline {
+      margin-top:10px;
+      padding:10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(34,197,94,.22);
+      background: rgba(34,197,94,.07);
+      color: #eafff1;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .2px;
+    }
+    .hero {
+      margin-top: 14px;
+      background: linear-gradient(180deg, rgba(255,255,255,.04), transparent 35%), rgba(15,23,42,.75);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      display:flex;
+      gap: 14px;
+      align-items:stretch;
+      justify-content:space-between;
+      flex-wrap:wrap;
+    }
+    .hero .left {display:flex;flex-direction:column;gap:6px;flex:1;min-width:300px}
+    .hero .right {min-width:260px;flex:1;max-width:520px;display:flex;flex-direction:column;gap:10px;justify-content:center}
+    .hero .title {font-size:12px;color:var(--muted);letter-spacing:.6px}
+    .hero .value {display:flex;gap:10px;align-items:baseline}
+    .hero .heatnum {font-size:28px;font-weight:900}
+    .hero .zone {font-size:12px;color:var(--muted);font-weight:900;letter-spacing:.4px}
+
+    /* 相場タイプ宣言 */
+    .modebox{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.2px;
+      margin-top:6px;
+      width: fit-content;
+    }
+    .mode-attack{ border-color: rgba(239,68,68,.32); background: rgba(239,68,68,.10); }
+    .mode-normal{ border-color: rgba(245,158,11,.32); background: rgba(245,158,11,.10); }
+    .mode-defend{ border-color: rgba(59,130,246,.32); background: rgba(59,130,246,.10); }
+    .mode-neutral{ border-color: rgba(148,163,184,.22); background: rgba(148,163,184,.08); }
+
+    .modedesc{ color: var(--muted); font-size:12px; line-height:1.6; }
+    .caution{
+      margin-top:6px;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid rgba(148,163,184,.18);
+      background: rgba(255,255,255,.02);
+      font-size:12px;
+      color:#e5e7eb;
+      font-weight:900;
+    }
+
+    .todo {
+      border:1px solid rgba(199,210,254,.18);
+      background: rgba(199,210,254,.06);
+      border-radius: 14px;
+      padding: 10px 12px;
+    }
+    .todo .t{font-size:12px;color:#c7d2fe;font-weight:900;letter-spacing:.3px}
+    .todo ul{margin:8px 0 0 18px;color:#e5e7eb;font-weight:800;line-height:1.6}
+    .todo li{margin:3px 0}
+
+    .grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}
+    @media (min-width: 920px) {
+      .grid{grid-template-columns:1.2fr .8fr}
+      .span2{grid-column:1 / -1}
+    }
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), transparent 35%), var(--card);
+      border:1px solid var(--line);
+      border-radius:16px;
+      padding:14px
+    }
+    .card h2{margin:0 0 8px 0;font-size:15px;color:#f3f4f6}
+    .hint{color:var(--muted);font-size:12px;margin-bottom:8px}
+    .divider{height:1px;background:var(--line);margin:10px 0}
+
+    /* Theme cards */
+    .themes{display:grid;grid-template-columns:1fr;gap:10px}
+    @media (min-width: 560px) {
+      .themes{grid-template-columns:1fr 1fr}
+    }
+    .tcard{
+      background:linear-gradient(180deg, rgba(255,255,255,.03), transparent 45%), var(--card2);
+      border:1px solid var(--line);
+      border-radius:14px;
+      padding:12px
+    }
+    .t-top{display:flex;align-items:center;gap:10px}
+    .t-rank{font-weight:900;color:#c7d2fe}
+    .t-name{font-weight:900;flex:1}
+    .t-score{display:flex;align-items:baseline;justify-content:space-between;margin-top:8px}
+    .big{font-size:22px;font-weight:900;letter-spacing:.2px}
+    .small{font-size:12px;color:var(--muted)}
+    .t-metrics{display:flex;gap:10px;margin-top:10px;color:var(--muted);font-size:12px}
+    .t-metrics .k{display:inline-block;min-width:34px}
+    .t-metrics .v{font-variant-numeric: tabular-nums; font-weight:900; color:#d1d5db}
+
+    /* Chips */
+    .chip{display:inline-flex;align-items:center;justify-content:center;padding:2px 8px;border-radius:999px; font-size:12px;border:1px solid var(--line); color:#e5e7eb; font-weight:900; letter-spacing:.2px}
+    .chip-muted{background:rgba(148,163,184,.08)}
+    .chip-mild{background:rgba(59,130,246,.12); border-color:rgba(59,130,246,.26)}
+    .chip-warm{background:rgba(245,158,11,.14); border-color:rgba(245,158,11,.28)}
+    .chip-hot{background:rgba(239,68,68,.14); border-color:rgba(239,68,68,.28)}
+    .wow{font-variant-numeric: tabular-nums; font-weight:900; letter-spacing:.2px}
+    .wow.mid{color:#86efac}
+    .wow.down{color:#93c5fd}
+
+    /* Bars */
+    .bar {
+      height: 8px;
+      background: rgba(148,163,184,.16);
+      border-radius: 999px;
+      margin-top: 8px;
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
+    }
+    .bar2 { height: 7px; margin-top: 6px; }
+    .bar-fill { height: 100%; background: linear-gradient(90deg, #22c55e, #f59e0b, #ef4444); }
+
+    /* Tables */
+    table{width:100%;border-collapse:collapse;font-size:13px}
+    th,td{padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+    th{color:var(--muted);font-weight:900;text-align:left;letter-spacing:.2px}
+    td.num{text-align:right;font-variant-numeric: tabular-nums}
+    td.mono{font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace}
+    td.note{color:var(--muted)}
+    .strong{font-weight:900}
+    .pos{color:#86efac; font-weight:900}
+    .neg{color:#fca5a5; font-weight:900}
+    .muted{color:var(--muted)}
+
+    /* Tag pills */
+    .pill-buy{display:inline-block;padding:2px 8px;border-radius:999px;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.26);font-size:12px;font-weight:900;white-space:nowrap}
+    .pill-neutral{display:inline-block;padding:2px 8px;border-radius:999px;background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.26);font-size:12px;font-weight:900;white-space:nowrap}
+    .pill-warn{display:inline-block;padding:2px 8px;border-radius:999px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.26);font-size:12px;font-weight:900;white-space:nowrap}
+
+    /* Reason summary */
+    .rsummary { color: #e5e7eb; font-weight: 900; margin-bottom: 6px; }
+    details.reason { background: rgba(255,255,255,.02); border: 1px solid rgba(148,163,184,.14); border-radius: 10px; padding: 6px 8px; }
+    details.reason > summary { cursor: pointer; color: var(--muted); font-weight: 900; list-style: none; }
+    details.reason > summary::-webkit-details-marker { display:none; }
+    .reason-body { margin-top: 8px; color: var(--text); line-height: 1.55; }
+
+    /* External links */
+    a.out { color: #e5e7eb; text-decoration: none; border-bottom: 1px dashed rgba(199,210,254,.45); }
+    a.out:hover { border-bottom-color: rgba(199,210,254,.9); }
+    a.mini {
+      display:inline-block;
+      margin-left:8px;
+      padding:2px 7px;
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.20);
+      color: var(--muted);
+      font-size:11px;
+      text-decoration:none;
+    }
+    a.mini:hover { color:#e5e7eb; border-color: rgba(199,210,254,.55); }
+
+    /* Filters */
+    .filters {
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+      margin: 8px 0 10px 0;
+    }
+    .filters label { color: var(--muted); font-size: 12px; font-weight: 900; }
+    .filters select, .filters button {
+      background: rgba(255,255,255,.03);
+      border: 1px solid var(--line);
+      color: var(--text);
+      padding: 6px 10px;
+      border-radius: 10px;
+      font-size: 12px;
+      outline: none;
+      cursor: pointer;
+    }
+    .filters button:hover { border-color: rgba(199,210,254,.55); }
+
+    footer {
+      margin-top: 18px;
+      padding: 14px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+
+<body>
+<div class="wrap">
+  <div>
+    <h1>今週の投資家ページ（2/2週）</h1>
+    <div class="meta">
+      更新日：<b>2026年2月22日</b> ／ 対象週：<b>2/2週</b><br/>
+      運用ルール：月曜の寄り付きで買い／ 上位5銘柄を均等配分／ 1週間保有（週次で入れ替え）
+      <small>（更新ID：20260222_0900）</small>
+    </div>
+
+    <div class="actionline">結論：今週は「高温（過熱手前） / 攻め週」。BUY 5件（均等配分）、WATCH 10件（急騰は買わない）。</div>
+
+    <div class="kpi">
+      <div class="pill2">見る順番：①注目テーマ → ②今週の買い → ③監視 → ④見立て</div>
+      <div class="pill2">買い方：月曜寄りでTOP5を均等 → 1週間保有（翌週入替）</div>
+      <div class="pill2">注意：急騰は買わず監視（WATCH）</div>
+    </div>
+
+    <div class="navrow">
+      <div class="navbox historylinks">
+        <b>過去回：</b> <a href='/investor-dashboard/history/20260222_0900.html'>2026/02/22 09:00</a> / <a href='/investor-dashboard/history/20260221_1544.html'>2026/02/21 15:44</a> / <a href='/investor-dashboard/history/20260220_1000.html'>2026/02/20 10:00</a> / <a href='/investor-dashboard/history/20260220_0900.html'>2026/02/20 09:00</a> / <a href='/investor-dashboard/history/20260220_0740.html'>2026/02/20 07:40</a> / <a href='/investor-dashboard/history/20260219_0735.html'>2026/02/19 07:35</a><br/>
+        <b><a href='/investor-dashboard/performance.html'>実績を見る</a></b>
+      </div>
+      <div class="navbox">
+        <b>次にやること：</b> 銘柄名から株探/Yahooでチャート・板・ニュースを確認。
+      </div>
+    </div>
+  </div>
+
+  <section class="hero">
+    <div class="left">
+      <div class="title">今週の市場温度（注目テーマ1位の温度）</div>
+      <div class="value">
+        <div class="heatnum">63.0</div>
+        <div class="zone"><span class="chip chip-hot">高温（過熱手前）</span></div>
+      </div>
+
+      <div class="modebox mode-attack">相場タイプ：攻め週</div>
+      <div class="modedesc">温度が高め。押し目は買い、急騰は買わず監視。</div>
+      <div class="caution">注意点：高温期はブレやすい。急騰は買わず、押し目だけ拾う。</div>
+    </div>
+
+    <div class="right">
+      
+    <div class="bar" title="温度 62.95">
+      <div class="bar-fill" style="width:80%"></div>
+    </div>
+    
+      <div class="todo">
+        <div class="t">今週やること（ToDo）</div>
+        <ul>
+          <li>① BUYは“押し目”優先（前週マイナスで絞るのが有効）</li><li>② 急騰（WATCH）は買わず監視（飛び乗り禁止）</li><li>③ 月曜寄りでTOP5均等→1週間だけ保有→翌週入替</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="grid">
+    <section class="card">
+      <h2>🔥 今週のテーマTOP5</h2>
+      <div class="hint">「いま市場の関心が集まっているテーマ」を温度で並べています。</div>
+      <div class="themes">
+        
+            <div class="tcard">
+              <div class="t-top">
+                <div class="t-rank">#1.0</div>
+                <div class="t-name">SaaS</div>
+                <div class="t-chip"><span class='chip chip-hot'>高温</span></div>
+              </div>
+
+              <div class="t-score">
+                <div class="big">62.95</div>
+                <div class="small"><span class='wow mid'>前週比：+8.8</span></div>
+              </div>
+
+              
+    <div class="bar" title="温度 62.95">
+      <div class="bar-fill" style="width:80%"></div>
+    </div>
+    
+
+              <div class="t-metrics">
+                <div><span class="k">IR</span><span class="v">1.06</span></div>
+                <div><span class="k">検索</span><span class="v">0.39</span></div>
+                <div><span class="k">需給</span><span class="v">0.79</span></div>
+              </div>
+            </div>
+            
+            <div class="tcard">
+              <div class="t-top">
+                <div class="t-rank">#2.0</div>
+                <div class="t-name">AI</div>
+                <div class="t-chip"><span class='chip chip-hot'>高温</span></div>
+              </div>
+
+              <div class="t-score">
+                <div class="big">62.19</div>
+                <div class="small"><span class='wow mid'>前週比：+13.4</span></div>
+              </div>
+
+              
+    <div class="bar" title="温度 62.19">
+      <div class="bar-fill" style="width:76%"></div>
+    </div>
+    
+
+              <div class="t-metrics">
+                <div><span class="k">IR</span><span class="v">1.22</span></div>
+                <div><span class="k">検索</span><span class="v">-0.78</span></div>
+                <div><span class="k">需給</span><span class="v">2.15</span></div>
+              </div>
+            </div>
+            
+            <div class="tcard">
+              <div class="t-top">
+                <div class="t-rank">#3.0</div>
+                <div class="t-name">サイバーセキュリティ</div>
+                <div class="t-chip"><span class='chip chip-warm'>上昇</span></div>
+              </div>
+
+              <div class="t-score">
+                <div class="big">61.88</div>
+                <div class="small"><span class='wow mid'>前週比：+6.0</span></div>
+              </div>
+
+              
+    <div class="bar" title="温度 61.88">
+      <div class="bar-fill" style="width:74%"></div>
+    </div>
+    
+
+              <div class="t-metrics">
+                <div><span class="k">IR</span><span class="v">0.81</span></div>
+                <div><span class="k">検索</span><span class="v">0.27</span></div>
+                <div><span class="k">需給</span><span class="v">1.14</span></div>
+              </div>
+            </div>
+            
+            <div class="tcard">
+              <div class="t-top">
+                <div class="t-rank">#4.0</div>
+                <div class="t-name">半導体</div>
+                <div class="t-chip"><span class='chip chip-mild'>平常</span></div>
+              </div>
+
+              <div class="t-score">
+                <div class="big">55.20</div>
+                <div class="small"><span class='wow mid'>前週比：+3.9</span></div>
+              </div>
+
+              
+    <div class="bar" title="温度 55.20">
+      <div class="bar-fill" style="width:32%"></div>
+    </div>
+    
+
+              <div class="t-metrics">
+                <div><span class="k">IR</span><span class="v">0.83</span></div>
+                <div><span class="k">検索</span><span class="v">-0.13</span></div>
+                <div><span class="k">需給</span><span class="v">-0.31</span></div>
+              </div>
+            </div>
+            
+            <div class="tcard">
+              <div class="t-top">
+                <div class="t-rank">#5.0</div>
+                <div class="t-name">EV・電池</div>
+                <div class="t-chip"><span class='chip chip-warm'>上昇</span></div>
+              </div>
+
+              <div class="t-score">
+                <div class="big">59.39</div>
+                <div class="small"><span class='muted'>前週比：—</span></div>
+              </div>
+
+              
+    <div class="bar" title="温度 59.39">
+      <div class="bar-fill" style="width:58%"></div>
+    </div>
+    
+
+              <div class="t-metrics">
+                <div><span class="k">IR</span><span class="v">1.13</span></div>
+                <div><span class="k">検索</span><span class="v">—</span></div>
+                <div><span class="k">需給</span><span class="v">0.01</span></div>
+              </div>
+            </div>
+            
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>🧠 今週の一言</h2>
+      <div class="hint">今週の見立て（文章）。</div>
+      <div style="border-left:3px solid var(--accent);padding-left:10px;color:#f3f4f6;font-weight:650">
+        今週は「SaaS」が最も高温。IR(+1.06)・検索(+0.39)・信用(+0.79)の合算で温度が加速（WoW +8.8）。BUYは押し目優遇・過熱除外ルールで横断TOP5を選別。
+      </div>
+
+      <div class="divider"></div>
+      <div class="hint">
+        買い：月曜寄りで上位5銘柄を均等に購入し、1週間保有します。<br/>
+        監視：急騰は“買わずに様子見”。押し目＋急騰などは監視枠に回します。
+      </div>
+    </section>
+
+    <section class="card span2">
+      <h2>💰 今週のBUY（横断TOP5・均等）</h2>
+      <div class="hint">BUY：押し目優先。根拠は「要約→詳細」。銘柄名クリックで外部へ。</div>
+
+      <div class="filters">
+        <label for="buyFilter">BUYの区分：</label>
+        <select id="buyFilter">
+          <option value=''>すべて</option>
+<option value='押し目'>押し目</option>
+        </select>
+        <button id="buyMinusOnly" type="button">前週マイナスだけ</button>
+        <button id="buyReset" type="button">リセット</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th class="num">#</th>
+            <th>証券コード</th>
+            <th>銘柄（外部）</th>
+            <th>区分</th>
+            <th class="num">総合</th>
+            <th class="num">前週騰落</th>
+            <th class="num">出来高</th>
+            <th>根拠</th>
+          </tr>
+        </thead>
+        <tbody id="buyBody">
+          
+            <tr class="buy-row" data-tag="押し目"
+                data-ret="-0.07008547008547">
+              <td class="num">1.0</td>
+              <td class="mono">5599</td>
+              <td class="strong">
+                <a class="out" href="https://kabutan.jp/stock/?code=5599" target="_blank" rel="noopener noreferrer">Ｓ＆Ｊ</a>
+                <a class="mini" href="https://finance.yahoo.co.jp/quote/5599.T" target="_blank" rel="noopener noreferrer">Yahoo</a>
+              </td>
+              <td><span class="pill-buy">押し目</span></td>
+              <td class="num">
+                <div class="scorebox">
+                  <div class="scorenum">233.31</div>
+                  
+    <div class="bar bar2" title="総合 233.31">
+      <div class="bar-fill" style="width:93%"></div>
+    </div>
+    
+                </div>
+              </td>
+              <td class="num neg">-7.0%</td>
+              <td class="num">28.8万株</td>
+              <td class="note">
+        <div class="rsummary">押し目判定</div>
+        <details class="reason">
+          <summary>詳細</summary>
+          <div class="reason-body">押し目判定。押し目優遇・過熱除外ルールで選別（出来高/トレンド調整込み）</div>
+        </details>
+        </td>
+            </tr>
+            
+            <tr class="buy-row" data-tag="押し目"
+                data-ret="-0.1248357424441524">
+              <td class="num">2.0</td>
+              <td class="mono">6228</td>
+              <td class="strong">
+                <a class="out" href="https://kabutan.jp/stock/?code=6228" target="_blank" rel="noopener noreferrer">ジェイ・イー・ティ</a>
+                <a class="mini" href="https://finance.yahoo.co.jp/quote/6228.T" target="_blank" rel="noopener noreferrer">Yahoo</a>
+              </td>
+              <td><span class="pill-buy">押し目</span></td>
+              <td class="num">
+                <div class="scorebox">
+                  <div class="scorenum">148.18</div>
+                  
+    <div class="bar bar2" title="総合 148.18">
+      <div class="bar-fill" style="width:59%"></div>
+    </div>
+    
+                </div>
+              </td>
+              <td class="num neg">-12.5%</td>
+              <td class="num">77.0万株</td>
+              <td class="note">
+        <div class="rsummary">押し目判定</div>
+        <details class="reason">
+          <summary>詳細</summary>
+          <div class="reason-body">押し目判定。押し目優遇・過熱除外ルールで選別（出来高/トレンド調整込み）</div>
+        </details>
+        </td>
+            </tr>
+            
+            <tr class="buy-row" data-tag="押し目"
+                data-ret="-0.0343901128425577">
+              <td class="num">3.0</td>
+              <td class="mono">1966</td>
+              <td class="strong">
+                <a class="out" href="https://kabutan.jp/stock/?code=1966" target="_blank" rel="noopener noreferrer">高田工業所</a>
+                <a class="mini" href="https://finance.yahoo.co.jp/quote/1966.T" target="_blank" rel="noopener noreferrer">Yahoo</a>
+              </td>
+              <td><span class="pill-buy">押し目</span></td>
+              <td class="num">
+                <div class="scorebox">
+                  <div class="scorenum">113.37</div>
+                  
+    <div class="bar bar2" title="総合 113.37">
+      <div class="bar-fill" style="width:45%"></div>
+    </div>
+    
+                </div>
+              </td>
+              <td class="num neg">-3.4%</td>
+              <td class="num">8.0万株</td>
+              <td class="note">
+        <div class="rsummary">押し目判定</div>
+        <details class="reason">
+          <summary>詳細</summary>
+          <div class="reason-body">押し目判定。押し目優遇・過熱除外ルールで選別（出来高/トレンド調整込み）</div>
+        </details>
+        </td>
+            </tr>
+            
+            <tr class="buy-row" data-tag="押し目"
+                data-ret="-0.0425068119891007">
+              <td class="num">4.0</td>
+              <td class="mono">4662</td>
+              <td class="strong">
+                <a class="out" href="https://kabutan.jp/stock/?code=4662" target="_blank" rel="noopener noreferrer">フォーカスシステムズ</a>
+                <a class="mini" href="https://finance.yahoo.co.jp/quote/4662.T" target="_blank" rel="noopener noreferrer">Yahoo</a>
+              </td>
+              <td><span class="pill-buy">押し目</span></td>
+              <td class="num">
+                <div class="scorebox">
+                  <div class="scorenum">88.17</div>
+                  
+    <div class="bar bar2" title="総合 88.17">
+      <div class="bar-fill" style="width:35%"></div>
+    </div>
+    
+                </div>
+              </td>
+              <td class="num neg">-4.3%</td>
+              <td class="num">48.6万株</td>
+              <td class="note">
+        <div class="rsummary">押し目判定</div>
+        <details class="reason">
+          <summary>詳細</summary>
+          <div class="reason-body">押し目判定。押し目優遇・過熱除外ルールで選別（出来高/トレンド調整込み）</div>
+        </details>
+        </td>
+            </tr>
+            
+            <tr class="buy-row" data-tag="押し目"
+                data-ret="-0.0281030444964871">
+              <td class="num">5.0</td>
+              <td class="mono">6050</td>
+              <td class="strong">
+                <a class="out" href="https://kabutan.jp/stock/?code=6050" target="_blank" rel="noopener noreferrer">イー・ガーディアン</a>
+                <a class="mini" href="https://finance.yahoo.co.jp/quote/6050.T" target="_blank" rel="noopener noreferrer">Yahoo</a>
+              </td>
+              <td><span class="pill-buy">押し目</span></td>
+              <td class="num">
+                <div class="scorebox">
+                  <div class="scorenum">88.17</div>
+                  
+    <div class="bar bar2" title="総合 88.17">
+      <div class="bar-fill" style="width:35%"></div>
+    </div>
+    
+                </div>
+              </td>
+              <td class="num neg">-2.8%</td>
+              <td class="num">29.3万株</td>
+              <td class="note">
+        <div class="rsummary">押し目判定</div>
+        <details class="reason">
+          <summary>詳細</summary>
+          <div class="reason-body">押し目判定。押し目優遇・過熱除外ルールで選別（出来高/トレンド調整込み）</div>
+        </details>
+        </td>
+            </tr>
+            
+        </tbody>
+      </table>
+    </section>
+
+    <section class="card span2">
+      <h2>👀 急騰監視（買わない・監視のみ）</h2>
+      <div class="hint">WATCH：急騰は買わずに監視。根拠は「要約→詳細」。</div>
+
+      <div class="filters">
+        <label for="watchFilter">WATCHの区分：</label>
+        <select id="watchFilter">
+          <option value=''>すべて</option>
+<option value='急騰テーマ'>急騰テーマ</option>
+<option value='押し目+急騰テーマ'>押し目+急騰テーマ</option>
+        </select>
+        <button id="watchMinusOnly" type="button">前週マイナスだけ</button>
+        <button id="watchReset" type="button">リセット</button>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>証券コード</th>
+            <th>銘柄（外部）</th>
+            <th>区分</th>
+            <th class="num">前週騰落</th>
+            <th class="num">出来高</th>
+            <th>根拠</th>
+          </tr>
+        </thead>
+        <tbody id="watchBody">
+          
+            <tr class="watch-row" data-tag="押し目+急騰テーマ"
+                data-ret="-0.0863880457623161">
+              <td class="mono">6702</td>
+              <td class="strong">
+                <a class="out" href="https://kabutan.jp/stock/?code=6702" target="_blank" rel="noopener noreferrer">富士通</a>
+                <a class="mini" href="https://finance.yahoo.co.jp/quote/6702.T" target="_blank" rel="noopener noreferrer">Yahoo</a>
+              </td>
+              <td><span class="pill-warn">押し目+急騰テーマ</span></td>
+              <td class="num neg">-8.6%</td>
+              <td class="num">6,350万株</td>
+              <td class="note">
+        <div class="rsummary">急騰のため監視</div>
+        <details class="reason">
+          <summary>詳細</summary>
+          <div class="reason-body">急騰のため監視</div>
+        </details>
+        </td>
+            </tr>
+            
+            <tr class="watch-row" data-tag="押し目+急騰テーマ"
+                data-ret="-0.1694915254237288">
+              <td class="mono">2980</td>
+              <td class="strong">
+                <a class="out" href="https://kabutan.jp/stock/?code=2980" target="_blank" rel="noopener noreferrer">ＳＲＥホールディングス</a>
+                <a class="mini" href="https://finance.yahoo.co.jp/quote/2980.T" target="_blank" rel="noopener noreferrer">Yahoo</a>
+              </td>
+              <td><span class="pill-warn">押し目+急騰テーマ</span></td>
+              <td class="num neg">-16.9%</td>
+              <td class="num">304万株</td>
+              <td class="note">
+        <div class="rsummary">急騰のため監視</div>
+        <details class="reason">
+          <summary>詳細</summary>
+          <div class="reason-body">急騰のため監視</div>
+        </details>
+        </td>
+            </tr>
+            
+            <tr class="watch-row" data-tag="押し目+急騰テーマ"
+                data-ret="-0.0482897384305834">
+              <td class="mono">3694</td>
+              <td class="strong">
+                <a class="out" href="https://kabutan.jp/stock/?code=3694" target="_blank" rel="noopener noreferrer">オプティム</a>
+                <a class="mini" href="https://finance.yahoo.co.jp/quote/3694.T" target="_blank" rel="noopener noreferrer">Yahoo</a>
+              </td>
+              <td><span class="pill-warn">押し目+急騰テーマ</span></td>
+              <td class="num neg">-4.8%</td>
+              <td class="num">107万株</td>
+              <td class="note">
+        <div class="rsummary">急騰のため監視</div>
+        <details class="reason">
+          <summary>詳細</summary>
+          <div class="reason-body">急騰のため監視</div>
+        </details>
+        </td>
+            </tr>
+            
+            <tr class="watch-row" data-tag="押し目+急騰テーマ"
+                data-ret="-0.0568945080995654">
+              <td class="mono">5132</td>
+              <td class="strong">
+                <a class="out" href="https://kabutan.jp/stock/?code=5132" target="_blank" rel="noopener noreferrer">ｐｌｕｓｚｅｒｏ</a>
+                <a class="mini" href="https://finance.yahoo.co.jp/quote/5132.T" target="_blank" rel="noopener noreferrer">Yahoo</a>
+              </td>
+              <td><span class="pill-warn">押し目+急騰テーマ</span></td>
+              <td class="num neg">-5.7%</td>
+              <td class="num">36.3万株</td>
+              <td class="note">
+        <div class="rsummary">急騰のため監視</div>
+        <details class="reason">
+          <summary>詳細</summary>
+          <div class="reason-body">急騰のため監視</div>
+        </details>
+        </td>
+            </tr>
+            
+            <tr class="watch-row" data-tag="押し目+急騰テーマ"
+                data-ret="-0.1040152963671128">
+              <td class="mono">4716</td>
+              <td class="strong">
+                <a class="out" href="https://kabutan.jp/stock/?code=4716" target="_blank" rel="noopener noreferrer">日本オラクル</a>
+                <a class="mini" href="https://finance.yahoo.co.jp/quote/4716.T" target="_blank" rel="noopener noreferrer">Yahoo</a>
+              </td>
+              <td><span class="pill-warn">押し目+急騰テーマ</span></td>
+              <td class="num neg">-10.4%</td>
+              <td class="num">209万株</td>
+              <td class="note">
+        <div class="rsummary">急騰のため監視</div>
+        <details class="reason">
+          <summary>詳細</summary>
+          <div class="reason-body">急騰のため監視</div>
+        </details>
+        </td>
+            </tr>
+            
+            <tr class="watch-row" data-tag="急騰テーマ"
+                data-ret="-0.0211946050096338">
+              <td class="mono">3491</td>
+              <td class="strong">
+                <a class="out" href="https://kabutan.jp/stock/?code=3491" target="_blank" rel="noopener noreferrer">ＧＡ ｔｅｃｈｎｏｌｏｇｉｅｓ</a>
+                <a class="mini" href="https://finance.yahoo.co.jp/quote/3491.T" target="_blank" rel="noopener noreferrer">Yahoo</a>
+              </td>
+              <td><span class="pill-warn">急騰テーマ</span></td>
+              <td class="num neg">-2.1%</td>
+              <td class="num">199万株</td>
+              <td class="note">
+        <div class="rsummary">急騰のため監視</div>
+        <details class="reason">
+          <summary>詳細</summary>
+          <div class="reason-body">急騰のため監視</div>
+        </details>
+        </td>
+            </tr>
+            
+            <tr class="watch-row" data-tag="急騰テーマ"
+                data-ret="-0.030264817150063">
+              <td class="mono">2354</td>
+              <td class="strong">
+                <a class="out" href="https://kabutan.jp/stock/?code=2354" target="_blank" rel="noopener noreferrer">ＹＥ ＤＩＧＩＴＡＬ</a>
+                <a class="mini" href="https://finance.yahoo.co.jp/quote/2354.T" target="_blank" rel="noopener noreferrer">Yahoo</a>
+              </td>
+              <td><span class="pill-warn">急騰テーマ</span></td>
+              <td class="num neg">-3.0%</td>
+              <td class="num">49.7万株</td>
+              <td class="note">
+        <div class="rsummary">急騰のため監視</div>
+        <details class="reason">
+          <summary>詳細</summary>
+          <div class="reason-body">急騰のため監視</div>
+        </details>
+        </td>
+            </tr>
+            
+            <tr class="watch-row" data-tag="押し目+急騰テーマ"
+                data-ret="-0.1085326669046768">
+              <td class="mono">4751</td>
+              <td class="strong">
+                <a class="out" href="https://kabutan.jp/stock/?code=4751" target="_blank" rel="noopener noreferrer">サイバーエージェント</a>
+                <a class="mini" href="https://finance.yahoo.co.jp/quote/4751.T" target="_blank" rel="noopener noreferrer">Yahoo</a>
+              </td>
+              <td><span class="pill-warn">押し目+急騰テーマ</span></td>
+              <td class="num neg">-10.9%</td>
+              <td class="num">2,933万株</td>
+              <td class="note">
+        <div class="rsummary">急騰のため監視</div>
+        <details class="reason">
+          <summary>詳細</summary>
+          <div class="reason-body">急騰のため監視</div>
+        </details>
+        </td>
+            </tr>
+            
+            <tr class="watch-row" data-tag="押し目+急騰テーマ"
+                data-ret="-0.0753768844221105">
+              <td class="mono">2321</td>
+              <td class="strong">
+                <a class="out" href="https://kabutan.jp/stock/?code=2321" target="_blank" rel="noopener noreferrer">ソフトフロントホールディングス</a>
+                <a class="mini" href="https://finance.yahoo.co.jp/quote/2321.T" target="_blank" rel="noopener noreferrer">Yahoo</a>
+              </td>
+              <td><span class="pill-warn">押し目+急騰テーマ</span></td>
+              <td class="num neg">-7.5%</td>
+              <td class="num">212万株</td>
+              <td class="note">
+        <div class="rsummary">急騰のため監視</div>
+        <details class="reason">
+          <summary>詳細</summary>
+          <div class="reason-body">急騰のため監視</div>
+        </details>
+        </td>
+            </tr>
+            
+            <tr class="watch-row" data-tag="急騰テーマ"
+                data-ret="0.0131421744324971">
+              <td class="mono">2158</td>
+              <td class="strong">
+                <a class="out" href="https://kabutan.jp/stock/?code=2158" target="_blank" rel="noopener noreferrer">ＦＲＯＮＴＥＯ</a>
+                <a class="mini" href="https://finance.yahoo.co.jp/quote/2158.T" target="_blank" rel="noopener noreferrer">Yahoo</a>
+              </td>
+              <td><span class="pill-warn">急騰テーマ</span></td>
+              <td class="num pos">+1.3%</td>
+              <td class="num">143万株</td>
+              <td class="note">
+        <div class="rsummary">急騰のため監視</div>
+        <details class="reason">
+          <summary>詳細</summary>
+          <div class="reason-body">急騰のため監視</div>
+        </details>
+        </td>
+            </tr>
+            
+        </tbody>
+      </table>
+
+      <div class="hint" style="margin-top:10px;">※ 監視はBUY対象外（監視のみ）。</div>
+    </section>
+  </div>
+
+  <footer>
+    このページは「予測」ではなく、市場の温度指標と固定ルールに基づく選別結果です。<br/>次にやること：外部リンクでチャート・板・ニュースを確認してください。<br/>急騰銘柄は買わずに監視（WATCH）に回します。ルールは固定のため、毎週検証が可能です。
+  </footer>
+</div>
+
+<script>
+  function parseNum(x) {
+    const v = parseFloat(x);
+    return Number.isFinite(v) ? v : null;
+  }
+
+  function applyTagFilter(selectId, rowSelector) {
+    const sel = document.getElementById(selectId);
+    const val = (sel && sel.value ? sel.value : "").trim();
+    document.querySelectorAll(rowSelector).forEach(tr => {
+      const tag = (tr.getAttribute("data-tag") || "").trim();
+      const show = (!val) || (tag === val);
+      tr.style.display = show ? "" : "none";
+    });
+  }
+
+  function applyMinusOnly(rowSelector, enabled) {
+    document.querySelectorAll(rowSelector).forEach(tr => {
+      if (tr.style.display === "none") return;
+      const r = parseNum(tr.getAttribute("data-ret"));
+      const show = !enabled || (r !== null && r < 0);
+      tr.style.display = show ? "" : "none";
+    });
+  }
+
+  function resetAll(selectId, rowSelector) {
+    const sel = document.getElementById(selectId);
+    if (sel) sel.value = "";
+    document.querySelectorAll(rowSelector).forEach(tr => tr.style.display = "");
+  }
+
+  // BUY
+  let buyMinus = false;
+  const buySel = document.getElementById("buyFilter");
+  const buyMinusBtn = document.getElementById("buyMinusOnly");
+  const buyResetBtn = document.getElementById("buyReset");
+
+  function refreshBuy() {
+    applyTagFilter("buyFilter", "tr.buy-row");
+    applyMinusOnly("tr.buy-row", buyMinus);
+  }
+
+  if (buySel) buySel.addEventListener("change", refreshBuy);
+  if (buyMinusBtn) buyMinusBtn.addEventListener("click", () => {
+    buyMinus = !buyMinus;
+    buyMinusBtn.textContent = buyMinus ? "前週マイナス解除" : "前週マイナスだけ";
+    refreshBuy();
+  });
+  if (buyResetBtn) buyResetBtn.addEventListener("click", () => {
+    buyMinus = false;
+    if (buyMinusBtn) buyMinusBtn.textContent = "前週マイナスだけ";
+    resetAll("buyFilter", "tr.buy-row");
+  });
+
+  // WATCH
+  let watchMinus = false;
+  const watchSel = document.getElementById("watchFilter");
+  const watchMinusBtn = document.getElementById("watchMinusOnly");
+  const watchResetBtn = document.getElementById("watchReset");
+
+  function refreshWatch() {
+    applyTagFilter("watchFilter", "tr.watch-row");
+    applyMinusOnly("tr.watch-row", watchMinus);
+  }
+
+  if (watchSel) watchSel.addEventListener("change", refreshWatch);
+  if (watchMinusBtn) watchMinusBtn.addEventListener("click", () => {
+    watchMinus = !watchMinus;
+    watchMinusBtn.textContent = watchMinus ? "前週マイナス解除" : "前週マイナスだけ";
+    refreshWatch();
+  });
+  if (watchResetBtn) watchResetBtn.addEventListener("click", () => {
+    watchMinus = false;
+    if (watchMinusBtn) watchMinusBtn.textContent = "前週マイナスだけ";
+    resetAll("watchFilter", "tr.watch-row");
+  });
+
+  // initial
+  refreshBuy();
+  refreshWatch();
+</script>
+</body>
+</html>
