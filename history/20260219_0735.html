@@ -1,1 +1,86 @@
-﻿<!doctype html> <html lang="ja"> <head> <meta charset="utf-8" /> <meta name="viewport" content="width=device-width, initial-scale=1" /> <title>Investor Page - 2026/2/2</title> <style> :root { --bg:#0b0f17; --card:#111827; --text:#e5e7eb; --muted:#9ca3af; --line:#1f2937; --accent:#22c55e; --warn:#f59e0b; } body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Meiryo", sans-serif; background:var(--bg); color:var(--text); } .wrap { max-width: 1120px; margin: 0 auto; padding: 20px; } h1 { margin:0; font-size: 22px; } .meta { color:var(--muted); font-size: 12px; line-height: 1.5; margin-top:6px; } .grid { display:grid; grid-template-columns: 1fr; gap: 14px; margin-top: 14px; } @media (min-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } .span2 { grid-column: span 2; } } .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding: 14px; } .card h2 { margin: 0 0 10px 0; font-size: 16px; } table { width:100%; border-collapse: collapse; font-size: 13px; } th, td { padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; } th { color: var(--muted); font-weight: 600; text-align:left; } td.num { text-align:right; font-variant-numeric: tabular-nums; } td.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; } td.note { color: var(--muted); } .badge { display:inline-block; padding: 3px 8px; border-radius: 999px; border:1px solid var(--line); } .pill { display:inline-block; padding: 3px 8px; border-radius: 999px; background: rgba(34,197,94,.12); border:1px solid rgba(34,197,94,.25); } .warn { display:inline-block; padding: 3px 8px; border-radius: 999px; background: rgba(245,158,11,.12); border:1px solid rgba(245,158,11,.25); } .callout { border-left: 3px solid var(--accent); padding-left: 10px; } </style> </head> <body> <div class="wrap"> <h1>毎週これだけ見ればいい：投資家ページ</h1> <div class="meta"> week_start: <b>2026/2/2</b> / asof: <b>2026-02-19</b> / run_id: <b>20260219_0735</b><br/> rule: MonOpen, TOP5 equal-weight, hold 1w </div> <div class="grid"> <section class="card"> <h2>🔥 今週のテーマTOP5</h2> <table><thead><tr><th>#</th><th>テーマ</th><th>温度</th><th>IR_z</th><th>検索_z</th><th>信用_z</th><th>WoW</th></tr></thead><tbody><tr><td class='num'>1.0</td><td><span class='badge'>SaaS</span></td><td class='num'>62.95</td><td class='num'>1.06</td><td class='num'>0.39</td><td class='num'>0.79</td><td class='num'>8.8</td></tr> <tr><td class='num'>2.0</td><td><span class='badge'>AI</span></td><td class='num'>62.19</td><td class='num'>1.22</td><td class='num'>-0.78</td><td class='num'>2.15</td><td class='num'>13.4</td></tr> <tr><td class='num'>3.0</td><td><span class='badge'>サイバーセキュリティ</span></td><td class='num'>61.88</td><td class='num'>0.81</td><td class='num'>0.27</td><td class='num'>1.14</td><td class='num'>6.0</td></tr> <tr><td class='num'>4.0</td><td><span class='badge'>半導体</span></td><td class='num'>55.20</td><td class='num'>0.83</td><td class='num'>-0.13</td><td class='num'>-0.31</td><td class='num'>3.9</td></tr> <tr><td class='num'>5.0</td><td><span class='badge'>EV・電池</span></td><td class='num'>59.39</td><td class='num'>1.13</td><td class='num'></td><td class='num'>0.01</td><td class='num'></td></tr></tbody></table> <div class="meta">heat_z は expanding z-score（未来情報なし）。WoWは加速指標で順位に直接は入れない。</div> </section> <section class="card"> <h2>🧠 今週の一言</h2> <div class="callout">今週は「SaaS」が最も高温。IR(+1.06)・検索(+0.39)・信用(+0.79)の合算で温度が加速（WoW +8.8）。BUYは押し目優遇・過熱除外ルールで横断TOP5を選別。</div> </section> <section class="card span2"> <h2>💰 今週のBUY（横断TOP5・均等）</h2> <table><thead><tr><th>#</th><th>code</th><th>銘柄</th><th>タグ</th><th>score</th><th>先週騰落</th><th>出来高</th><th>理由</th></tr></thead><tbody><tr><td class='num'>1.0</td><td class='mono'>5599.0</td><td>Ｓ＆Ｊ</td><td><span class='pill'>押し目</span></td><td class='num'>233.31</td><td class='num'>-0.070</td><td class='num'>287800</td><td class='note'>押し目判定。押し目優遇・過熱除外ルールで選別（出来高/トレンド調整込み）</td></tr> <tr><td class='num'>2.0</td><td class='mono'>6228.0</td><td>ジェイ・イー・ティ</td><td><span class='pill'>押し目</span></td><td class='num'>148.18</td><td class='num'>-0.125</td><td class='num'>769600</td><td class='note'>押し目判定。押し目優遇・過熱除外ルールで選別（出来高/トレンド調整込み）</td></tr> <tr><td class='num'>3.0</td><td class='mono'>1966.0</td><td>高田工業所</td><td><span class='pill'>押し目</span></td><td class='num'>113.37</td><td class='num'>-0.034</td><td class='num'>79700</td><td class='note'>押し目判定。押し目優遇・過熱除外ルールで選別（出来高/トレンド調整込み）</td></tr> <tr><td class='num'>4.0</td><td class='mono'>4662.0</td><td>フォーカスシステムズ</td><td><span class='pill'>押し目</span></td><td class='num'>88.17</td><td class='num'>-0.043</td><td class='num'>486200</td><td class='note'>押し目判定。押し目優遇・過熱除外ルールで選別（出来高/トレンド調整込み）</td></tr> <tr><td class='num'>5.0</td><td class='mono'>6050.0</td><td>イー・ガーディアン</td><td><span class='pill'>押し目</span></td><td class='num'>88.17</td><td class='num'>-0.028</td><td class='num'>292800</td><td class='note'>押し目判定。押し目優遇・過熱除外ルールで選別（出来高/トレンド調整込み）</td></tr></tbody></table> </section> <section class="card span2"> <h2>👀 急騰監視（買わない・監視のみ）</h2> <table><thead><tr><th>code</th><th>銘柄</th><th>区分</th><th>先週騰落</th><th>出来高</th><th>理由</th></tr></thead><tbody><tr><td class='mono'>6702.0</td><td>富士通</td><td><span class='warn'>押し目+急騰テーマ</span></td><td class='num'>-0.086</td><td class='num'>63502400</td><td class='note'>急騰のため監視</td></tr> <tr><td class='mono'>2980.0</td><td>ＳＲＥホールディングス</td><td><span class='warn'>押し目+急騰テーマ</span></td><td class='num'>-0.169</td><td class='num'>3038600</td><td class='note'>急騰のため監視</td></tr> <tr><td class='mono'>3694.0</td><td>オプティム</td><td><span class='warn'>押し目+急騰テーマ</span></td><td class='num'>-0.048</td><td class='num'>1067200</td><td class='note'>急騰のため監視</td></tr> <tr><td class='mono'>5132.0</td><td>ｐｌｕｓｚｅｒｏ</td><td><span class='warn'>押し目+急騰テーマ</span></td><td class='num'>-0.057</td><td class='num'>363000</td><td class='note'>急騰のため監視</td></tr> <tr><td class='mono'>4716.0</td><td>日本オラクル</td><td><span class='warn'>押し目+急騰テーマ</span></td><td class='num'>-0.104</td><td class='num'>2089500</td><td class='note'>急騰のため監視</td></tr> <tr><td class='mono'>3491.0</td><td>ＧＡ ｔｅｃｈｎｏｌｏｇｉｅｓ</td><td><span class='warn'>急騰テーマ</span></td><td class='num'>-0.021</td><td class='num'>1992000</td><td class='note'>急騰のため監視</td></tr> <tr><td class='mono'>2354.0</td><td>ＹＥ ＤＩＧＩＴＡＬ</td><td><span class='warn'>急騰テーマ</span></td><td class='num'>-0.030</td><td class='num'>496600</td><td class='note'>急騰のため監視</td></tr> <tr><td class='mono'>4751.0</td><td>サイバーエージェント</td><td><span class='warn'>押し目+急騰テーマ</span></td><td class='num'>-0.109</td><td class='num'>29332200</td><td class='note'>急騰のため監視</td></tr> <tr><td class='mono'>2321.0</td><td>ソフトフロントホールディングス</td><td><span class='warn'>押し目+急騰テーマ</span></td><td class='num'>-0.075</td><td class='num'>2124300</td><td class='note'>急騰のため監視</td></tr> <tr><td class='mono'>2158.0</td><td>ＦＲＯＮＴＥＯ</td><td><span class='warn'>急騰テーマ</span></td><td class='num'>0.013</td><td class='num'>1433700</td><td class='note'>急騰のため監視</td></tr></tbody></table> <div class="meta">急騰監視はBUY対象外（監視のみ）。</div> </section> </div> </div> </body> </html> 
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Investor Page - 2026/2/2</title>
+<style>
+  :root {
+    --bg:#0b0f17; --card:#111827; --text:#e5e7eb; --muted:#9ca3af;
+    --line:#1f2937; --accent:#22c55e; --warn:#f59e0b;
+  }
+  body { margin:0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans JP", "Meiryo", sans-serif;
+         background:var(--bg); color:var(--text); }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 20px; }
+  h1 { margin:0; font-size: 22px; }
+  .meta { color:var(--muted); font-size: 12px; line-height: 1.5; margin-top:6px; }
+  .grid { display:grid; grid-template-columns: 1fr; gap: 14px; margin-top: 14px; }
+  @media (min-width: 900px) {
+    .grid { grid-template-columns: 1fr 1fr; }
+    .span2 { grid-column: span 2; }
+  }
+  .card { background:var(--card); border:1px solid var(--line); border-radius:14px; padding: 14px; }
+  .card h2 { margin: 0 0 10px 0; font-size: 16px; }
+  table { width:100%; border-collapse: collapse; font-size: 13px; }
+  th, td { padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; text-align:left; }
+  td.num { text-align:right; font-variant-numeric: tabular-nums; }
+  td.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+  td.note { color: var(--muted); }
+  .badge { display:inline-block; padding: 3px 8px; border-radius: 999px; border:1px solid var(--line); }
+  .pill { display:inline-block; padding: 3px 8px; border-radius: 999px; background: rgba(34,197,94,.12); border:1px solid rgba(34,197,94,.25); }
+  .warn { display:inline-block; padding: 3px 8px; border-radius: 999px; background: rgba(245,158,11,.12); border:1px solid rgba(245,158,11,.25); }
+  .callout { border-left: 3px solid var(--accent); padding-left: 10px; }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>毎週これだけ見ればいい：投資家ページ</h1>
+    <div class="meta">
+      week_start: <b>2026/2/2</b> / asof: <b>2026-02-19</b> / run_id: <b>20260219_0735</b><br/>
+      rule: MonOpen, TOP5 equal-weight, hold 1w
+    </div>
+
+    <div class="grid">
+      <section class="card">
+        <h2>🔥 今週のテーマTOP5</h2>
+        <table><thead><tr><th>#</th><th>テーマ</th><th>温度</th><th>IR_z</th><th>検索_z</th><th>信用_z</th><th>WoW</th></tr></thead><tbody><tr><td class='num'>1.0</td><td><span class='badge'>SaaS</span></td><td class='num'>62.95</td><td class='num'>1.06</td><td class='num'>0.39</td><td class='num'>0.79</td><td class='num'>8.8</td></tr>
+<tr><td class='num'>2.0</td><td><span class='badge'>AI</span></td><td class='num'>62.19</td><td class='num'>1.22</td><td class='num'>-0.78</td><td class='num'>2.15</td><td class='num'>13.4</td></tr>
+<tr><td class='num'>3.0</td><td><span class='badge'>サイバーセキュリティ</span></td><td class='num'>61.88</td><td class='num'>0.81</td><td class='num'>0.27</td><td class='num'>1.14</td><td class='num'>6.0</td></tr>
+<tr><td class='num'>4.0</td><td><span class='badge'>半導体</span></td><td class='num'>55.20</td><td class='num'>0.83</td><td class='num'>-0.13</td><td class='num'>-0.31</td><td class='num'>3.9</td></tr>
+<tr><td class='num'>5.0</td><td><span class='badge'>EV・電池</span></td><td class='num'>59.39</td><td class='num'>1.13</td><td class='num'></td><td class='num'>0.01</td><td class='num'></td></tr></tbody></table>
+        <div class="meta">heat_z は expanding z-score（未来情報なし）。WoWは加速指標で順位に直接は入れない。</div>
+      </section>
+
+      <section class="card">
+        <h2>🧠 今週の一言</h2>
+        <div class="callout">今週は「SaaS」が最も高温。IR(+1.06)・検索(+0.39)・信用(+0.79)の合算で温度が加速（WoW +8.8）。BUYは押し目優遇・過熱除外ルールで横断TOP5を選別。</div>
+      </section>
+
+      <section class="card span2">
+        <h2>💰 今週のBUY（横断TOP5・均等）</h2>
+        <table><thead><tr><th>#</th><th>code</th><th>銘柄</th><th>タグ</th><th>score</th><th>先週騰落</th><th>出来高</th><th>理由</th></tr></thead><tbody><tr><td class='num'>1.0</td><td class='mono'>5599.0</td><td>Ｓ＆Ｊ</td><td><span class='pill'>押し目</span></td><td class='num'>233.31</td><td class='num'>-0.070</td><td class='num'>287800</td><td class='note'>押し目判定。押し目優遇・過熱除外ルールで選別（出来高/トレンド調整込み）</td></tr>
+<tr><td class='num'>2.0</td><td class='mono'>6228.0</td><td>ジェイ・イー・ティ</td><td><span class='pill'>押し目</span></td><td class='num'>148.18</td><td class='num'>-0.125</td><td class='num'>769600</td><td class='note'>押し目判定。押し目優遇・過熱除外ルールで選別（出来高/トレンド調整込み）</td></tr>
+<tr><td class='num'>3.0</td><td class='mono'>1966.0</td><td>高田工業所</td><td><span class='pill'>押し目</span></td><td class='num'>113.37</td><td class='num'>-0.034</td><td class='num'>79700</td><td class='note'>押し目判定。押し目優遇・過熱除外ルールで選別（出来高/トレンド調整込み）</td></tr>
+<tr><td class='num'>4.0</td><td class='mono'>4662.0</td><td>フォーカスシステムズ</td><td><span class='pill'>押し目</span></td><td class='num'>88.17</td><td class='num'>-0.043</td><td class='num'>486200</td><td class='note'>押し目判定。押し目優遇・過熱除外ルールで選別（出来高/トレンド調整込み）</td></tr>
+<tr><td class='num'>5.0</td><td class='mono'>6050.0</td><td>イー・ガーディアン</td><td><span class='pill'>押し目</span></td><td class='num'>88.17</td><td class='num'>-0.028</td><td class='num'>292800</td><td class='note'>押し目判定。押し目優遇・過熱除外ルールで選別（出来高/トレンド調整込み）</td></tr></tbody></table>
+      </section>
+
+      <section class="card span2">
+        <h2>👀 急騰監視（買わない・監視のみ）</h2>
+        <table><thead><tr><th>code</th><th>銘柄</th><th>区分</th><th>先週騰落</th><th>出来高</th><th>理由</th></tr></thead><tbody><tr><td class='mono'>6702.0</td><td>富士通</td><td><span class='warn'>押し目+急騰テーマ</span></td><td class='num'>-0.086</td><td class='num'>63502400</td><td class='note'>急騰のため監視</td></tr>
+<tr><td class='mono'>2980.0</td><td>ＳＲＥホールディングス</td><td><span class='warn'>押し目+急騰テーマ</span></td><td class='num'>-0.169</td><td class='num'>3038600</td><td class='note'>急騰のため監視</td></tr>
+<tr><td class='mono'>3694.0</td><td>オプティム</td><td><span class='warn'>押し目+急騰テーマ</span></td><td class='num'>-0.048</td><td class='num'>1067200</td><td class='note'>急騰のため監視</td></tr>
+<tr><td class='mono'>5132.0</td><td>ｐｌｕｓｚｅｒｏ</td><td><span class='warn'>押し目+急騰テーマ</span></td><td class='num'>-0.057</td><td class='num'>363000</td><td class='note'>急騰のため監視</td></tr>
+<tr><td class='mono'>4716.0</td><td>日本オラクル</td><td><span class='warn'>押し目+急騰テーマ</span></td><td class='num'>-0.104</td><td class='num'>2089500</td><td class='note'>急騰のため監視</td></tr>
+<tr><td class='mono'>3491.0</td><td>ＧＡ ｔｅｃｈｎｏｌｏｇｉｅｓ</td><td><span class='warn'>急騰テーマ</span></td><td class='num'>-0.021</td><td class='num'>1992000</td><td class='note'>急騰のため監視</td></tr>
+<tr><td class='mono'>2354.0</td><td>ＹＥ ＤＩＧＩＴＡＬ</td><td><span class='warn'>急騰テーマ</span></td><td class='num'>-0.030</td><td class='num'>496600</td><td class='note'>急騰のため監視</td></tr>
+<tr><td class='mono'>4751.0</td><td>サイバーエージェント</td><td><span class='warn'>押し目+急騰テーマ</span></td><td class='num'>-0.109</td><td class='num'>29332200</td><td class='note'>急騰のため監視</td></tr>
+<tr><td class='mono'>2321.0</td><td>ソフトフロントホールディングス</td><td><span class='warn'>押し目+急騰テーマ</span></td><td class='num'>-0.075</td><td class='num'>2124300</td><td class='note'>急騰のため監視</td></tr>
+<tr><td class='mono'>2158.0</td><td>ＦＲＯＮＴＥＯ</td><td><span class='warn'>急騰テーマ</span></td><td class='num'>0.013</td><td class='num'>1433700</td><td class='note'>急騰のため監視</td></tr></tbody></table>
+        <div class="meta">急騰監視はBUY対象外（監視のみ）。</div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
